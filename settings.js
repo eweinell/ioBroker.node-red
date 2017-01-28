@@ -73,7 +73,7 @@ module.exports = {
     // By default, these are served relative to '/'. The following property
     // can be used to specifiy a different root path. If set to false, this is
     // disabled.
-    //httpNodeRoot: '/nodes',
+    httpNodeRoot: '/whome',
     
     // To password protect the node-defined HTTP endpoints, the following property
     // can be used.
@@ -136,6 +136,79 @@ module.exports = {
         // os:require('os'),
         // bonescript:require('bonescript'),
         // arduino:require('duino')
+    },
+    swagger: {
+      "template": {
+        "swagger": "2.0",
+        "info": {
+        "title": "wHome API",
+        "version": "0.1.0"
+        },
+        "basePath": "/whome",
+        "definitions": {
+          "weatherwarning": {
+            "properties": {
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              },
+              "level": {
+                "type": "number"
+              },
+              "type": {
+                "type": "number"
+              },
+              "event": {
+                "type": "string"
+              },
+              "headline": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "notification": {
+            "properties": {
+              "receiver": {
+                "type": "string"
+              },
+              "date": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "seq": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "category": {
+                "type": "string"
+              },
+              "subcategory": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "string",
+                "enum": ["alert", "high", "normal", "info"]
+              },
+              "state":  {
+                "type": "string",
+                "enum": ["new", "published", "seen", "hidden"]
+              }, 
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          "notification-preference": {}
+        }
+      }
     }
 
 };
