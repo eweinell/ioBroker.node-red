@@ -1846,3 +1846,54 @@ RED.nodes.registerType('ioBroker get',{
     });
 </script>
 
+<script type="text/javascript">
+	RED.nodes.registerType('ioBroker getHistory', {
+		category: 'function',
+		color: '#a8bfd8',
+		defaults: {
+			name: {value: ''},
+			history: {value: 'history.0', required: true},
+			topicFilter: {value: '', required: true},
+			optionsSource: {value: '', required: false},
+			debug: {value: false}
+		},
+		icon: "ioBroker.png",
+		inputs: 1,
+		outputs: 1,
+		label: function() {
+			return this.name || 'ioBroker getHistory';
+		},
+		labelStyle: function() {
+			return this.name?"node_label_italic":"";
+		},
+		paletteLabel: 'ioBroker getHistory',
+		align: 'left'
+	});
+</script>
+
+<script type="text/x-red" data-template-name="ioBroker getHistory">
+	<div class="form-row">
+		<label for="node-input-name"><i class="icon-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-history"><i class="fa"></i> History adapter</label>
+		<input type="text" id="node-input-history" placeholder="">
+	</div>
+	<div class="form-row">
+		<label for="node-input-topicFilter"><i class="fa"></i> Filter history ids</label>
+		<input type="text" id="node-input-topicFilter" placeholder="">
+	</div>
+	<div class="form-row">
+		<label for="node-input-optionsSource"><i class="fa"></i> Options source</label>
+		<input type="text" id="node-input-optionsSource" placeholder="">
+	</div>
+	<div class="form-row">
+		<label for="node-input-debug"><i class="fa"></i>Debug output</label>
+		<input type="checkbox" id="node-input-debug" placeholder="">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="ioBroker getHistory">
+	<p>Retrieves historic data from a given ioBroker object, according to the given options.</p>
+</script>
