@@ -9,11 +9,26 @@ ioBroker node-red Adapter
 
 # Starts node-red instance and communicates with it.
 
+***This adapter needs at least nodejs 4.x to work***
+
 This adapter uses the node-red server from https://github.com/node-red/node-red
 
 **Note:** If in select ID dialog of the ioBroker node you cannot find some variable, restart node-red instance. By restarting the new list of objects will be created.
 
 ## Changelog
+### 1.4.1 (2017-10-03)
+* (twonky4) fix blank topic support
+
+### 1.4.0 (2017-08-06)
+* (bluefox) use newer version of node-red 0.17.5
+
+### 1.3.0 (2017-04-13)
+* (bluefox) Update the select ID dialog
+* (bluefox) Add node-red-contrib-polymer
+
+### 1.2.0 (2017-02-14)
+* (bluefox) use newer version of node-red 0.16.2
+
 ### 1.1.6 (2017-01-24)
 * (bluefox) use newer version of node-red 0.16.2
 
