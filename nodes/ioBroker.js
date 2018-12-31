@@ -386,4 +386,59 @@ module.exports = function(RED) {
 
     }
     RED.nodes.registerType('ioBroker get', IOBrokerGetNode);
+    
+    function IOBrokerGetHistoryNode(n) {
+      var node = this;
+      RED.nodes.createNode(node,n);
+
+      node.history = n.history;
+      node.topicFilter = n.topicFilter;
+      node.optionsSource = n.optionsSource;
+      node.debug = n.debug;
+      
+      if (ready) {
+          node.status({fill: 'green', shape: 'dot', text: 'connected'});
+      } else {
+          node.status({fill: 'red', shape: 'ring', text: 'disconnected'}, true);
+      }
+
+      node.on('input', (msg) => {
+          let options = msg[node.optionsSource || 'history-options'] || {};
+          let queryOptions = Object.assign({}, options);
+          let id = node.topicFilter;
+          
+          debug("querying history with : " + id + ", options " + queryOptions)
+          
+          if (typeof queryOptions.instance === 'undefined') {
+            queryOptions.instance = node.history;
+          }
+          
+          adapter.getHistory(id, queryOptions, (error, result, step, sessionId) => {
+            if (error) {
+              node.error('failed to query history: ' + error, msg);
+            } else if (result) {
+              debug("received success message with response: " + result);
+              msg.payload = result;
+              node.send(msg);
+            }
+          });
+          
+          debug("history query sent");
+
+        function debug(msg) {
+          if (node.debug) {
+           console.log(msg);
+           node.send({debug: msg}); 
+          }
+        }
+          
+      });
+
+      if (!ready) {
+          nodes.push(node);
+      }   
+    }
+
+    RED.nodes.registerType('ioBroker getHistory', IOBrokerGetHistoryNode);
+    RED.nodes.registerType('iobroker-history', IOBrokerGetHistoryNode);
 };

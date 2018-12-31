@@ -1,9 +1,13 @@
 node_modules
 .idea
 tmp
+<<<<<<< HEAD
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
 iob_npm.done
 package-lock.json
 /userdata
 .project
+=======
+/.project
+>>>>>>> refs/heads/develop
